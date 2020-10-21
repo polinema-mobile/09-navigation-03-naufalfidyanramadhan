@@ -2,10 +2,19 @@
 <layout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	>
-	<data>
+	xmlns:tools="http://schemas.android.com/tools">
 
+	<!--definisi variabel data pada fragment_score.xml yang digunakan untuk menyimpan data skor-->
+	<data>
+		<variable
+			name="homeGoalScorerList"
+			type="java.util.List" />
+		<variable
+			name="awayGoalScorerList"
+			type="java.util.List" />
+		<variable
+			name="fragment"
+			type="id.ac.polinema.skor.fragments.ScoreFragment" />
 	</data>
 
 	<androidx.constraintlayout.widget.ConstraintLayout
@@ -13,13 +22,15 @@
 		android:layout_height="match_parent"
 		tools:context=".fragments.ScoreFragment">
 
+		<!--menghitung score-->
 		<TextView
 			android:id="@+id/textView"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
-			android:text="Home"
-			android:textSize="36sp"
+			android:text="@{String.valueOf(homeGoalScorerList.size())}"
+			android:textSize="64sp"
+			app:layout_constraintBottom_toTopOf="@+id/guideline"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
@@ -29,8 +40,8 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
-			android:text="Away"
-			android:textSize="36sp"
+			android:text="@{String.valueOf(awayGoalScorerList.size())}"
+			android:textSize="64sp"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="@+id/guideline" />
@@ -42,6 +53,7 @@
 			android:layout_marginStart="8dp"
 			android:layout_marginEnd="8dp"
 			android:layout_marginBottom="16dp"
+			android:onClick="@{(v) -> fragment.onAddHomeClick(v)}"
 			android:text="Add Score Home"
 			app:layout_constraintBottom_toTopOf="@+id/guideline"
 			app:layout_constraintEnd_toEndOf="parent"
@@ -54,6 +66,7 @@
 			android:layout_marginStart="8dp"
 			android:layout_marginEnd="8dp"
 			android:layout_marginBottom="16dp"
+			android:onClick="@{(v) -> fragment.onAddAwayClick(v)}"
 			android:text="Add Score Away"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
@@ -92,6 +105,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="8dp"
+			android:text="@{fragment.home}"
 			app:layout_constraintBottom_toTopOf="@+id/button_add_home"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent" />
@@ -101,6 +115,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="8dp"
+			android:text="@{fragment.away}"
 			app:layout_constraintBottom_toTopOf="@+id/button_add_away"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent" />
