@@ -12,12 +12,16 @@ import androidx.navigation.Navigation;
 import id.ac.polinema.skor.R;
 import id.ac.polinema.skor.databinding.FragmentGoalBinding;
 import id.ac.polinema.skor.models.GoalScorer;
-import id.ac.polinema.skor.fragments.ScoreFragment;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
 public class GoalFragment extends Fragment {
 
 	private String requestKey;
 	private GoalScorer goalScorer;
+
+	private FragmentGoalBinding binding;
 
 	public GoalFragment() {
 		// Required empty public constructor
@@ -32,11 +36,14 @@ public class GoalFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		FragmentGoalBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_goal, container, false);
-		binding.setFragment(this);
+		binding = DataBindingUtil.inflate(inflater, R.layout.fragment_goal, container, false);
+		View view = binding.getRoot();
 		binding.setGoalScorer(goalScorer);
 		requestKey = GoalFragmentArgs.fromBundle(getArguments()).getRequestKey();
-		return binding.getRoot();
+
+		binding.setFragment(this);
+
+		return view;
 	}
 
 	public void onSaveClicked(View view) {
